@@ -1,0 +1,627 @@
+
+
+=============================================
+ Upload Time : 10/03/23 Tuesday 12:33:13
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 9월 27일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (5주 1일)
+// 
+// 10월 25일 (8주 2일) - 중간시험
+//-----------------------------------------------------------------------------
+// 내용
+// change 함수
+//-----------------------------------------------------------------------------
+// 과제 - 정렬 (Sort)
+//-----------------------------------------------------------------------------
+
+#include <iostream>
+#include <random>
+#include <print>
+#include "save.h"
+
+// [문제] int 여러개를 저장할 수 있는 배열을 만들어라.
+// 각 int의 값을 1 ~999'999까지의 값 중 랜덤 값으로 만들어라.
+// 이 배열을 오름차순으로 정렬하라.
+// 일부분을 출력해서 정렬된 것을 확인하자.
+
+std::default_random_engine dre;
+std::uniform_int_distribution uid{ 1,999'999 };
+
+void change(int&, int&);
+void quick_sort(int[], int, int);
+
+int main()
+{
+
+	int num[100]{};
+	//&는 원래 데이터에 붙는 별명이나까	원본을 그대로 사용하고 싶을 때 쓴다.
+	for (int& number : num)
+		number = uid(dre);
+
+	//정렬 - qsort로 코딩
+
+	for (auto num : num)
+	{
+		std::print("{:8d}", num);
+	}
+	save("14.cpp", "FileOutput\\2023_10_03 CPP 14-output", std::ios::app, true);
+}
+void change(int& a, int& b)
+{
+	int temp{ a };
+	a = b;
+	b = temp;
+}
+void quick_sort(int num[], int left, int right)
+{
+	int i{ left }, j{ right };
+	int pivot{ num[left + right / 2] };
+	while (i <= j) {}
+}
+
+
+=============================================
+ Upload Time : 10/03/23 Tuesday 12:33:53
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 9월 27일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (5주 1일)
+// 
+// 10월 25일 (8주 2일) - 중간시험
+//-----------------------------------------------------------------------------
+// 내용
+// change 함수
+//-----------------------------------------------------------------------------
+// 과제 - 정렬 (Sort)
+//-----------------------------------------------------------------------------
+
+#include <iostream>
+#include <random>
+#include <print>
+#include "save.h"
+
+// [문제] int 여러개를 저장할 수 있는 배열을 만들어라.
+// 각 int의 값을 1 ~999'999까지의 값 중 랜덤 값으로 만들어라.
+// 이 배열을 오름차순으로 정렬하라.
+// 일부분을 출력해서 정렬된 것을 확인하자.
+
+std::default_random_engine dre;
+std::uniform_int_distribution uid{ 1,999'999 };
+
+void change(int&, int&);
+void quick_sort(int[], int, int);
+
+int main()
+{
+
+	int num[100]{};
+	//&는 원래 데이터에 붙는 별명이나까	원본을 그대로 사용하고 싶을 때 쓴다.
+	for (int number : num)
+		number = uid(dre);
+
+	//정렬 - qsort로 코딩
+
+	for (auto num : num)
+	{
+		std::print("{:8d}", num);
+	}
+	save("14.cpp", "FileOutput\\2023_10_03 CPP 14-output", std::ios::app, true);
+}
+void change(int& a, int& b)
+{
+	int temp{ a };
+	a = b;
+	b = temp;
+}
+void quick_sort(int num[], int left, int right)
+{
+	int i{ left }, j{ right };
+	int pivot{ num[left + right / 2] };
+	while (i <= j) {}
+}
+
+
+=============================================
+ Upload Time : 10/03/23 Tuesday 13:14:36
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 9월 27일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (5주 1일)
+// 
+// 10월 25일 (8주 2일) - 중간시험
+//-----------------------------------------------------------------------------
+// 내용
+// change 함수
+//-----------------------------------------------------------------------------
+// 과제 - 정렬 (Sort)
+//-----------------------------------------------------------------------------
+
+#include <iostream>
+#include <random>
+#include <algorithm>
+#include <print>
+#include "save.h"
+
+// [문제] int 여러개를 저장할 수 있는 배열을 만들어라.
+// 각 int의 값을 1 ~999'999까지의 값 중 랜덤 값으로 만들어라.
+// 이 배열을 오름차순으로 정렬하라.
+// 일부분을 출력해서 정렬된 것을 확인하자.
+
+std::default_random_engine dre;
+std::uniform_int_distribution uid{ 1,999'999 };
+
+void change(int&, int&);
+void quick_sort(int[], int, int);
+
+int main()
+{
+
+	int num[100]{};
+	//&는 원래 데이터에 붙는 별명이나까	원본을 그대로 사용하고 싶을 때 쓴다.
+	for (int& number : num)
+		number = uid(dre);
+
+	//정렬 - qsort로 코딩
+	int comp(const void*,const void*);
+	std::qsort(num, 10, sizeof(int), comp);
+
+	for (auto num : num)
+	{
+		std::print("{:8d}", num);
+	}
+	save("14.cpp", "FileOutput\\2023_10_03 CPP 14-output", std::ios::app, true);
+}
+int comp(const void* p, const void* q)
+{
+	int a = *(int*)p;
+	int b = *(int*)q;
+
+	//오름차순
+	if (a > b)
+		return 1;
+	else if (a < b)
+		return -1;
+	return 0;
+}
+
+=============================================
+ Upload Time : 10/03/23 Tuesday 13:14:52
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 9월 27일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (5주 1일)
+// 
+// 10월 25일 (8주 2일) - 중간시험
+//-----------------------------------------------------------------------------
+// 내용
+// change 함수
+//-----------------------------------------------------------------------------
+// 과제 - 정렬 (Sort)
+//-----------------------------------------------------------------------------
+
+#include <iostream>
+#include <random>
+#include <algorithm>
+#include <print>
+#include "save.h"
+
+// [문제] int 여러개를 저장할 수 있는 배열을 만들어라.
+// 각 int의 값을 1 ~999'999까지의 값 중 랜덤 값으로 만들어라.
+// 이 배열을 오름차순으로 정렬하라.
+// 일부분을 출력해서 정렬된 것을 확인하자.
+
+std::default_random_engine dre;
+std::uniform_int_distribution uid{ 1,999'999 };
+
+void change(int&, int&);
+void quick_sort(int[], int, int);
+
+int main()
+{
+
+	int num[10000]{};
+	//&는 원래 데이터에 붙는 별명이나까	원본을 그대로 사용하고 싶을 때 쓴다.
+	for (int& number : num)
+		number = uid(dre);
+
+	//정렬 - qsort로 코딩
+	int comp(const void*,const void*);
+	std::qsort(num, 10, sizeof(int), comp);
+
+	for (auto num : num)
+	{
+		std::print("{:8d}", num);
+	}
+	save("14.cpp", "FileOutput\\2023_10_03 CPP 14-output", std::ios::app, true);
+}
+int comp(const void* p, const void* q)
+{
+	int a = *(int*)p;
+	int b = *(int*)q;
+
+	//오름차순
+	if (a > b)
+		return 1;
+	else if (a < b)
+		return -1;
+	return 0;
+}
+
+=============================================
+ Upload Time : 10/03/23 Tuesday 13:15:02
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 9월 27일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (5주 1일)
+// 
+// 10월 25일 (8주 2일) - 중간시험
+//-----------------------------------------------------------------------------
+// 내용
+// change 함수
+//-----------------------------------------------------------------------------
+// 과제 - 정렬 (Sort)
+//-----------------------------------------------------------------------------
+
+#include <iostream>
+#include <random>
+#include <algorithm>
+#include <print>
+#include "save.h"
+
+// [문제] int 여러개를 저장할 수 있는 배열을 만들어라.
+// 각 int의 값을 1 ~999'999까지의 값 중 랜덤 값으로 만들어라.
+// 이 배열을 오름차순으로 정렬하라.
+// 일부분을 출력해서 정렬된 것을 확인하자.
+
+std::default_random_engine dre;
+std::uniform_int_distribution uid{ 1,999'999 };
+
+void change(int&, int&);
+void quick_sort(int[], int, int);
+
+int main()
+{
+
+	int num[100000]{};
+	//&는 원래 데이터에 붙는 별명이나까	원본을 그대로 사용하고 싶을 때 쓴다.
+	for (int& number : num)
+		number = uid(dre);
+
+	//정렬 - qsort로 코딩
+	int comp(const void*,const void*);
+	std::qsort(num, 10, sizeof(int), comp);
+
+	for (auto num : num)
+	{
+		std::print("{:8d}", num);
+	}
+	save("14.cpp", "FileOutput\\2023_10_03 CPP 14-output", std::ios::app, true);
+}
+int comp(const void* p, const void* q)
+{
+	int a = *(int*)p;
+	int b = *(int*)q;
+
+	//오름차순
+	if (a > b)
+		return 1;
+	else if (a < b)
+		return -1;
+	return 0;
+}
+
+=============================================
+ Upload Time : 10/03/23 Tuesday 13:15:21
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 9월 27일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (5주 1일)
+// 
+// 10월 25일 (8주 2일) - 중간시험
+//-----------------------------------------------------------------------------
+// 내용
+// change 함수
+//-----------------------------------------------------------------------------
+// 과제 - 정렬 (Sort)
+//-----------------------------------------------------------------------------
+
+#include <iostream>
+#include <random>
+#include <algorithm>
+#include <print>
+#include "save.h"
+
+// [문제] int 여러개를 저장할 수 있는 배열을 만들어라.
+// 각 int의 값을 1 ~999'999까지의 값 중 랜덤 값으로 만들어라.
+// 이 배열을 오름차순으로 정렬하라.
+// 일부분을 출력해서 정렬된 것을 확인하자.
+
+std::default_random_engine dre;
+std::uniform_int_distribution uid{ 1,999'999 };
+
+void change(int&, int&);
+void quick_sort(int[], int, int);
+
+int main()
+{
+
+	int num[256000]{};
+	//&는 원래 데이터에 붙는 별명이나까	원본을 그대로 사용하고 싶을 때 쓴다.
+	for (int& number : num)
+		number = uid(dre);
+
+	//정렬 - qsort로 코딩
+	int comp(const void*,const void*);
+	std::qsort(num, 10, sizeof(int), comp);
+
+	for (auto num : num)
+	{
+		std::print("{:8d}", num);
+	}
+	save("14.cpp", "FileOutput\\2023_10_03 CPP 14-output", std::ios::app, true);
+}
+int comp(const void* p, const void* q)
+{
+	int a = *(int*)p;
+	int b = *(int*)q;
+
+	//오름차순
+	if (a > b)
+		return 1;
+	else if (a < b)
+		return -1;
+	return 0;
+}
+
+=============================================
+ Upload Time : 10/03/23 Tuesday 13:15:54
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 9월 27일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (5주 1일)
+// 
+// 10월 25일 (8주 2일) - 중간시험
+//-----------------------------------------------------------------------------
+// 내용
+// change 함수
+//-----------------------------------------------------------------------------
+// 과제 - 정렬 (Sort)
+//-----------------------------------------------------------------------------
+
+#include <iostream>
+#include <random>
+#include <algorithm>
+#include <print>
+#include "save.h"
+
+// [문제] int 여러개를 저장할 수 있는 배열을 만들어라.
+// 각 int의 값을 1 ~999'999까지의 값 중 랜덤 값으로 만들어라.
+// 이 배열을 오름차순으로 정렬하라.
+// 일부분을 출력해서 정렬된 것을 확인하자.
+
+std::default_random_engine dre;
+std::uniform_int_distribution uid{ 1,999'999 };
+
+void change(int&, int&);
+void quick_sort(int[], int, int);
+
+int main()
+{
+
+	int num[1000]{};
+	//&는 원래 데이터에 붙는 별명이나까	원본을 그대로 사용하고 싶을 때 쓴다.
+	for (int& number : num)
+		number = uid(dre);
+
+	//정렬 - qsort로 코딩
+	int comp(const void*,const void*);
+	std::qsort(num, 1000, sizeof(int), comp);
+
+	for (auto num : num)
+	{
+		std::print("{:8d}", num);
+	}
+	save("14.cpp", "FileOutput\\2023_10_03 CPP 14-output", std::ios::app, true);
+}
+int comp(const void* p, const void* q)
+{
+	int a = *(int*)p;
+	int b = *(int*)q;
+
+	//오름차순
+	if (a > b)
+		return 1;
+	else if (a < b)
+		return -1;
+	return 0;
+}
+
+=============================================
+ Upload Time : 10/03/23 Tuesday 13:16:28
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 9월 27일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (5주 1일)
+// 
+// 10월 25일 (8주 2일) - 중간시험
+//-----------------------------------------------------------------------------
+// 내용
+// change 함수
+//-----------------------------------------------------------------------------
+// 과제 - 정렬 (Sort)
+//-----------------------------------------------------------------------------
+
+#include <iostream>
+#include <random>
+#include <algorithm>
+#include <print>
+#include "save.h"
+
+// [문제] int 여러개를 저장할 수 있는 배열을 만들어라.
+// 각 int의 값을 1 ~999'999까지의 값 중 랜덤 값으로 만들어라.
+// 이 배열을 오름차순으로 정렬하라.
+// 일부분을 출력해서 정렬된 것을 확인하자.
+
+std::default_random_engine dre;
+std::uniform_int_distribution uid{ 1,999'999 };
+
+void change(int&, int&);
+void quick_sort(int[], int, int);
+
+int main()
+{
+	const int NUM = 1000;
+	int num[NUM]{};
+	//&는 원래 데이터에 붙는 별명이나까	원본을 그대로 사용하고 싶을 때 쓴다.
+	for (int& number : num)
+		number = uid(dre);
+
+	//정렬 - qsort로 코딩
+	int comp(const void*,const void*);
+	std::qsort(num, NUM, sizeof(int), comp);
+
+	for (auto num : num)
+	{
+		std::print("{:8d}", num);
+	}
+	save("14.cpp", "FileOutput\\2023_10_03 CPP 14-output", std::ios::app, true);
+}
+int comp(const void* p, const void* q)
+{
+	int a = *(int*)p;
+	int b = *(int*)q;
+
+	//오름차순
+	if (a > b)
+		return 1;
+	else if (a < b)
+		return -1;
+	return 0;
+}
+
+=============================================
+ Upload Time : 10/03/23 Tuesday 13:16:39
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 9월 27일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (5주 1일)
+// 
+// 10월 25일 (8주 2일) - 중간시험
+//-----------------------------------------------------------------------------
+// 내용
+// change 함수
+//-----------------------------------------------------------------------------
+// 과제 - 정렬 (Sort)
+//-----------------------------------------------------------------------------
+
+#include <iostream>
+#include <random>
+#include <algorithm>
+#include <print>
+#include "save.h"
+
+// [문제] int 여러개를 저장할 수 있는 배열을 만들어라.
+// 각 int의 값을 1 ~999'999까지의 값 중 랜덤 값으로 만들어라.
+// 이 배열을 오름차순으로 정렬하라.
+// 일부분을 출력해서 정렬된 것을 확인하자.
+
+std::default_random_engine dre;
+std::uniform_int_distribution uid{ 1,999'999 };
+
+void change(int&, int&);
+void quick_sort(int[], int, int);
+
+int main()
+{
+	const int NUM = 100000;
+	int num[NUM]{};
+	//&는 원래 데이터에 붙는 별명이나까	원본을 그대로 사용하고 싶을 때 쓴다.
+	for (int& number : num)
+		number = uid(dre);
+
+	//정렬 - qsort로 코딩
+	int comp(const void*,const void*);
+	std::qsort(num, NUM, sizeof(int), comp);
+
+	for (auto num : num)
+	{
+		std::print("{:8d}", num);
+	}
+	save("14.cpp", "FileOutput\\2023_10_03 CPP 14-output", std::ios::app, true);
+}
+int comp(const void* p, const void* q)
+{
+	int a = *(int*)p;
+	int b = *(int*)q;
+
+	//오름차순
+	if (a > b)
+		return 1;
+	else if (a < b)
+		return -1;
+	return 0;
+}
+
+=============================================
+ Upload Time : 10/03/23 Tuesday 13:16:55
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 9월 27일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (5주 1일)
+// 
+// 10월 25일 (8주 2일) - 중간시험
+//-----------------------------------------------------------------------------
+// 내용
+// change 함수
+//-----------------------------------------------------------------------------
+// 과제 - 정렬 (Sort)
+//-----------------------------------------------------------------------------
+
+#include <iostream>
+#include <random>
+#include <algorithm>
+#include <print>
+#include "save.h"
+
+// [문제] int 여러개를 저장할 수 있는 배열을 만들어라.
+// 각 int의 값을 1 ~999'999까지의 값 중 랜덤 값으로 만들어라.
+// 이 배열을 오름차순으로 정렬하라.
+// 일부분을 출력해서 정렬된 것을 확인하자.
+
+std::default_random_engine dre;
+std::uniform_int_distribution uid{ 1,999'999 };
+
+void change(int&, int&);
+void quick_sort(int[], int, int);
+
+int main()
+{
+	const int NUM = 256000;
+	int num[NUM]{};
+	//&는 원래 데이터에 붙는 별명이나까	원본을 그대로 사용하고 싶을 때 쓴다.
+	for (int& number : num)
+		number = uid(dre);
+
+	//정렬 - qsort로 코딩
+	int comp(const void*,const void*);
+	std::qsort(num, NUM, sizeof(int), comp);
+
+	for (auto num : num)
+	{
+		std::print("{:8d}", num);
+	}
+	save("14.cpp", "FileOutput\\2023_10_03 CPP 14-output", std::ios::app, true);
+}
+int comp(const void* p, const void* q)
+{
+	int a = *(int*)p;
+	int b = *(int*)q;
+
+	//오름차순
+	if (a > b)
+		return 1;
+	else if (a < b)
+		return -1;
+	return 0;
+}

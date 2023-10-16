@@ -1,0 +1,113 @@
+
+
+=============================================
+ Upload Time : 10/03/23 Tuesday 11:49:58
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 9월 27일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (5주 1일)
+// 
+// 10월 25일 (8주 2일) - 중간시험
+//-----------------------------------------------------------------------------
+// 내용
+// change 함수
+//-----------------------------------------------------------------------------
+// 과제 - 정렬 (Sort)
+//-----------------------------------------------------------------------------
+
+#include <iostream>
+#include <random>
+#include "save.h"
+
+// [문제] int 1'000개를 저장할 수 있는 배열을 만들어라.
+// 각 int의 값을 1 ~999까지의 값 중 랜덤 값으로 만들어라.
+// 이 배열을 오름차순으로 정렬하라.
+// 전체 1'000개의 값을 화면에 출력하라.
+
+std::default_random_engine dre;
+std::uniform_int_distribution uid{ 1,999 };
+
+void change(int&, int&);
+void quick_sort(int [],int,int);
+
+int main()
+{
+	const int NUM{ 1'000 };
+	int num[NUM]{};
+	for (int i = 0; i < NUM; ++i)
+		num[i] = uid(dre);
+	for (auto num : num)
+	{
+		std::cout << num << " ";
+	}
+	save("13.cpp", "FileOutput\\2023_10_03 CPP 13-output", std::ios::app, true);
+}
+void change(int& a, int& b)
+{
+	int temp{ a };
+	a = b;
+	b = temp;
+}
+void quick_sort(int num[], int left, int right)
+{
+	int i{ left }, j{ right };
+	int pivot{ num[left + right / 2] };
+	while(i <= j){}
+}
+
+
+=============================================
+ Upload Time : 10/03/23 Tuesday 11:51:19
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 9월 27일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (5주 1일)
+// 
+// 10월 25일 (8주 2일) - 중간시험
+//-----------------------------------------------------------------------------
+// 내용
+// change 함수
+//-----------------------------------------------------------------------------
+// 과제 - 정렬 (Sort)
+//-----------------------------------------------------------------------------
+
+#include <iostream>
+#include <random>
+#include <print>
+#include "save.h"
+
+// [문제] int 1'000개를 저장할 수 있는 배열을 만들어라.
+// 각 int의 값을 1 ~999까지의 값 중 랜덤 값으로 만들어라.
+// 이 배열을 오름차순으로 정렬하라.
+// 전체 1'000개의 값을 화면에 출력하라.
+
+std::default_random_engine dre;
+std::uniform_int_distribution uid{ 1,999 };
+
+void change(int&, int&);
+void quick_sort(int [],int,int);
+
+int main()
+{
+	const int NUM{ 1'000 };
+	int num[NUM]{};
+	for (int i = 0; i < NUM; ++i)
+		num[i] = uid(dre);
+	for (auto num : num)
+	{
+		std::print("{:4d}", num);
+	}
+	save("13.cpp", "FileOutput\\2023_10_03 CPP 13-output", std::ios::app, true);
+}
+void change(int& a, int& b)
+{
+	int temp{ a };
+	a = b;
+	b = temp;
+}
+void quick_sort(int num[], int left, int right)
+{
+	int i{ left }, j{ right };
+	int pivot{ num[left + right / 2] };
+	while(i <= j){}
+}

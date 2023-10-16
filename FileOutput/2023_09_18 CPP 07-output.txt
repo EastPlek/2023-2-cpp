@@ -1,0 +1,162 @@
+
+
+=============================================
+ Upload Time : 09/18/23 Monday 17:41:11
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 9월 11일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (3주 1일)
+// 다음 주 수요일 9/20일 - 전시로 수업을 대체 함. (3주 2일)
+//-----------------------------------------------------------------------------
+// 내용
+// 랜덤 엔진과 분포
+//-----------------------------------------------------------------------------
+// 과제 - 알아서 잘 복습하자
+//-----------------------------------------------------------------------------
+
+
+#include <iostream>
+#include <random>	// 랜덤값과 분포를 사용하려면....
+#include <format>
+#include "save.h"
+
+
+std::default_random_engine dre; // 랜덤값을 생성하는 엔진
+std::uniform_int_distribution uid{ 1,999 };
+
+int main()
+{
+	int num1;
+	bool bFind = false;
+	std::cout << "수 입력 : ";
+	std::cin >> num1;
+	int numbers[100];
+	for (int i = 0; i < 100; i++)
+		numbers[i] = uid(dre);
+
+	for (int num : numbers)
+		std::cout << std::format("{:4d}", num);
+	for (int num : numbers) {
+		if (num1 == num)
+		{
+			bFind = true;
+			break;
+		}
+	}
+	if (bFind)
+		std::cout << "있음" << '\n';
+	else
+		std::cout << "없음" << '\n';
+
+	save("07.cpp", "FileOutput\\2023_09_18 CPP 07-output", std::ios::app, true);
+}
+
+
+
+=============================================
+ Upload Time : 09/18/23 Monday 17:50:25
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 9월 11일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (3주 1일)
+// 다음 주 수요일 9/20일 - 전시로 수업을 대체 함. (3주 2일)
+//-----------------------------------------------------------------------------
+// 내용
+// 랜덤 엔진과 분포
+//-----------------------------------------------------------------------------
+// 과제 - 알아서 잘 복습하자
+//-----------------------------------------------------------------------------
+
+
+#include <iostream>
+#include <random>	// 랜덤값과 분포를 사용하려면....
+#include <format>
+#include "save.h"
+
+
+std::default_random_engine dre; // 랜덤값을 생성하는 엔진
+std::uniform_int_distribution uid{ 1,999 };
+
+int main()
+{
+	int num1 ;
+	bool bFind{ false };
+	std::cout << "수 입력 : ";
+	std::cin >> num1;
+	int numbers[100];
+	for (int i = 0; i < 100; i++)
+		numbers[i] = uid(dre);
+
+	for (int num : numbers)
+		std::cout << std::format("{:4d}", num);
+	for (int num : numbers) {
+		if (num1 == num)
+		{
+			std::cout << "있음" << '\n';
+			bFind = true;
+			break;
+		}
+	}
+	if (not bFind)
+		std::cout << "없음" << '\n';
+
+	save("07.cpp", "FileOutput\\2023_09_18 CPP 07-output", std::ios::app, true);
+}
+
+
+
+=============================================
+ Upload Time : 09/18/23 Monday 18:01:57
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 9월 11일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (3주 1일)
+// 다음 주 수요일 9/20일 - 전시로 수업을 대체 함. (3주 2일)
+//-----------------------------------------------------------------------------
+// 내용
+// 많은 수의 int가 있다 - 어떻게 저장할건가? 어떤 작업을 하고 싶나?
+//-----------------------------------------------------------------------------
+// 과제 - 알아서 잘 복습하자
+//-----------------------------------------------------------------------------
+
+
+#include <iostream>
+#include <random>	// 랜덤값과 분포를 사용하려면....
+#include <format>
+#include "save.h"
+
+
+std::default_random_engine dre; // 랜덤값을 생성하는 엔진
+std::uniform_int_distribution uid{ 1,999 };
+
+int main()
+{
+	int num1;
+	int numbers[100];
+	for (int i = 0; i < 100; i++)
+		numbers[i] = uid(dre);
+
+	for (int num : numbers)
+		std::cout << std::format("{:4d}", num);
+	while (true)
+	{
+		bool bFind{ false };
+		std::cout << "수 입력 : ";
+		std::cin >> num1;
+		for (int num : numbers) {
+			if (num1 == num)
+			{
+				std::cout << "있음" << '\n';
+				bFind = true;
+				break;
+			}
+		}
+		if (not bFind)
+			std::cout << "없음" << '\n';
+		break;
+
+	}
+
+	save("07.cpp", "FileOutput\\2023_09_18 CPP 07-output", std::ios::app, true);
+}
+

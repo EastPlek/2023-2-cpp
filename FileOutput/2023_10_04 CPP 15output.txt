@@ -1,0 +1,677 @@
+
+
+=============================================
+ Upload Time : 10/04/23 Wednesday 15:56:26
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 10월 4일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (5주 2일)
+// 
+// 10월 9일(6주 1일) - 동영상 강의
+// 10월 25일 (8주 2일) - 중간시험
+//-----------------------------------------------------------------------------
+// 내용
+// change 함수
+//-----------------------------------------------------------------------------
+// 과제 - 정렬 (Sort)
+//-----------------------------------------------------------------------------
+
+#include <iostream>
+#include <random>
+#include <print>
+#include <algorithm>
+#include "save.h"
+
+//qsort : generic function (많은 자료형 사용 가능)
+
+std::default_random_engine dre;
+std::uniform_int_distribution uid{ 1,99'9999 };
+
+int main()
+{
+	const int NUM{ 200000 };
+
+	int num[NUM];
+
+	for (int& number : num)
+	{
+		number = uid(dre);
+	}
+
+	for (int num : num)
+	{
+		std::print("{:8d}", num);
+	}
+	std::print("\n");
+	save("15.cpp", "FileOutput\\2023_10_04 CPP 15output", std::ios::app, true);
+}
+
+
+=============================================
+ Upload Time : 10/04/23 Wednesday 16:03:08
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 10월 4일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (5주 2일)
+// 
+// 10월 9일(6주 1일) - 동영상 강의
+// 10월 25일 (8주 2일) - 중간시험
+//-----------------------------------------------------------------------------
+// 내용
+// change 함수
+//-----------------------------------------------------------------------------
+// 과제 - 정렬 (Sort)
+//-----------------------------------------------------------------------------
+
+#include <iostream>
+#include <random>
+#include <print>
+#include <algorithm>
+#include "save.h"
+
+//qsort : generic function (많은 자료형 사용 가능)
+
+std::default_random_engine dre;
+std::uniform_int_distribution uid{ 1,99'9999 };
+
+int main()
+{
+	const int NUM{ 200000 };
+
+	int num[NUM];
+
+	for (int& number : num)
+	{
+		number = uid(dre);
+	}
+	//qsort로 정렬
+	int compFunc(const void*a, const void* b);
+	std::qsort(num, NUM, sizeof(int),compFunc);
+
+	for (int num : num)
+	{
+		std::print("{:8d}", num);
+	}
+	std::print("\n");
+	save("15.cpp", "FileOutput\\2023_10_04 CPP 15output", std::ios::app, true);
+}
+
+int compFunc(const void* a, const void* b)
+{
+	return *(int*)a - *(int*)b;
+}
+
+
+=============================================
+ Upload Time : 10/04/23 Wednesday 16:03:55
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 10월 4일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (5주 2일)
+// 
+// 10월 9일(6주 1일) - 동영상 강의
+// 10월 25일 (8주 2일) - 중간시험
+//-----------------------------------------------------------------------------
+// 내용
+// change 함수
+//-----------------------------------------------------------------------------
+// 과제 - 정렬 (Sort)
+//-----------------------------------------------------------------------------
+
+#include <iostream>
+#include <random>
+#include <print>
+#include <algorithm>
+#include "save.h"
+
+//qsort : generic function (많은 자료형 사용 가능)
+
+std::default_random_engine dre;
+std::uniform_int_distribution uid{ 1,99'9999 };
+
+int main()
+{
+	const int NUM{ 200000 };
+
+	int num[NUM];
+
+	for (int& number : num)
+	{
+		number = uid(dre);
+	}
+	//qsort로 정렬
+	int compFunc(const void*a, const void* b);
+	std::qsort(num, NUM, sizeof(int),compFunc);
+
+	for (int num : num)
+	{
+		std::print("{:8d}", num);
+	}
+	std::print("\n");
+	save("15.cpp", "FileOutput\\2023_10_04 CPP 15output", std::ios::app, true);
+}
+
+int compFunc(const void* a, const void* b)
+{
+	return *(int*)b - *(int*)a;
+}
+
+
+=============================================
+ Upload Time : 10/04/23 Wednesday 16:13:28
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 10월 4일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (5주 2일)
+// 
+// 10월 9일(6주 1일) - 동영상 강의
+// 10월 25일 (8주 2일) - 중간시험
+//-----------------------------------------------------------------------------
+// 내용
+// change 함수
+//-----------------------------------------------------------------------------
+// 과제 - 정렬 (Sort)
+//-----------------------------------------------------------------------------
+
+#include <iostream>
+#include <random>
+#include <print>
+#include <algorithm>
+#include "save.h"
+
+//qsort : generic function (많은 자료형 사용 가능)
+
+std::default_random_engine dre;
+std::uniform_int_distribution uid{ 1,99'9999 };
+
+int count{};
+
+int main()
+{
+	const int NUM{ 200000 };
+
+	int num[NUM];
+
+	for (int& number : num)
+	{
+		number = uid(dre);
+	}
+	//qsort로 정렬
+	int compFunc(const void*a, const void* b);
+	std::qsort(num, NUM, sizeof(int),compFunc);
+
+	for (int num : num)
+	{
+		std::print("{:8d}", num);
+	}
+	std::print("\n");
+	std::cout << "호출 횟수 : " << count << '\n';
+	save("15.cpp", "FileOutput\\2023_10_04 CPP 15output", std::ios::app, true);
+}
+
+int compFunc(const void* a, const void* b)
+{
+	++count;
+	return *(int*)b - *(int*)a;
+}
+
+
+=============================================
+ Upload Time : 10/04/23 Wednesday 16:14:00
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 10월 4일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (5주 2일)
+// 
+// 10월 9일(6주 1일) - 동영상 강의
+// 10월 25일 (8주 2일) - 중간시험
+//-----------------------------------------------------------------------------
+// 내용
+// change 함수
+//-----------------------------------------------------------------------------
+// 과제 - 정렬 (Sort)
+//-----------------------------------------------------------------------------
+
+#include <iostream>
+#include <random>
+#include <print>
+#include <algorithm>
+#include "save.h"
+
+//qsort : generic function (많은 자료형 사용 가능)
+
+std::default_random_engine dre;
+std::uniform_int_distribution uid{ 1,99'9999 };
+
+int count{0};
+
+int main()
+{
+	const int NUM{ 200000 };
+
+	int num[NUM];
+
+	for (int& number : num)
+	{
+		number = uid(dre);
+	}
+	//qsort로 정렬
+	int compFunc(const void*a, const void* b);
+	std::qsort(num, NUM, sizeof(int),compFunc);
+
+	for (int num : num)
+	{
+		std::print("{:8d}", num);
+	}
+	std::print("\n");
+	std::cout << "호출 횟수 : " << count << '\n';
+	save("15.cpp", "FileOutput\\2023_10_04 CPP 15output", std::ios::app, true);
+}
+
+int compFunc(const void* a, const void* b)
+{
+	++count;
+	return *(int*)b - *(int*)a;
+}
+
+
+=============================================
+ Upload Time : 10/04/23 Wednesday 16:14:10
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 10월 4일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (5주 2일)
+// 
+// 10월 9일(6주 1일) - 동영상 강의
+// 10월 25일 (8주 2일) - 중간시험
+//-----------------------------------------------------------------------------
+// 내용
+// change 함수
+//-----------------------------------------------------------------------------
+// 과제 - 정렬 (Sort)
+//-----------------------------------------------------------------------------
+
+#include <iostream>
+#include <random>
+#include <print>
+#include <algorithm>
+#include "save.h"
+
+//qsort : generic function (많은 자료형 사용 가능)
+
+std::default_random_engine dre;
+std::uniform_int_distribution uid{ 1,99'9999 };
+
+int count{0};
+
+int main()
+{
+	const int NUM{ 2000};
+
+	int num[NUM];
+
+	for (int& number : num)
+	{
+		number = uid(dre);
+	}
+	//qsort로 정렬
+	int compFunc(const void*a, const void* b);
+	std::qsort(num, NUM, sizeof(int),compFunc);
+
+	for (int num : num)
+	{
+		std::print("{:8d}", num);
+	}
+	std::print("\n");
+	std::cout << "호출 횟수 : " << count << '\n';
+	save("15.cpp", "FileOutput\\2023_10_04 CPP 15output", std::ios::app, true);
+}
+
+int compFunc(const void* a, const void* b)
+{
+	++count;
+	return *(int*)b - *(int*)a;
+}
+
+
+=============================================
+ Upload Time : 10/04/23 Wednesday 16:14:20
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 10월 4일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (5주 2일)
+// 
+// 10월 9일(6주 1일) - 동영상 강의
+// 10월 25일 (8주 2일) - 중간시험
+//-----------------------------------------------------------------------------
+// 내용
+// change 함수
+//-----------------------------------------------------------------------------
+// 과제 - 정렬 (Sort)
+//-----------------------------------------------------------------------------
+
+#include <iostream>
+#include <random>
+#include <print>
+#include <algorithm>
+#include "save.h"
+
+//qsort : generic function (많은 자료형 사용 가능)
+
+std::default_random_engine dre;
+std::uniform_int_distribution uid{ 1,99'9999 };
+
+int count{0};
+
+int main()
+{
+	const int NUM{ 200};
+
+	int num[NUM];
+
+	for (int& number : num)
+	{
+		number = uid(dre);
+	}
+	//qsort로 정렬
+	int compFunc(const void*a, const void* b);
+	std::qsort(num, NUM, sizeof(int),compFunc);
+
+	for (int num : num)
+	{
+		std::print("{:8d}", num);
+	}
+	std::print("\n");
+	std::cout << "호출 횟수 : " << count << '\n';
+	save("15.cpp", "FileOutput\\2023_10_04 CPP 15output", std::ios::app, true);
+}
+
+int compFunc(const void* a, const void* b)
+{
+	++count;
+	return *(int*)b - *(int*)a;
+}
+
+
+=============================================
+ Upload Time : 10/04/23 Wednesday 16:15:16
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 10월 4일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (5주 2일)
+// 
+// 10월 9일(6주 1일) - 동영상 강의
+// 10월 25일 (8주 2일) - 중간시험
+//-----------------------------------------------------------------------------
+// 내용
+// change 함수
+//-----------------------------------------------------------------------------
+// 과제 - 정렬 (Sort)
+//-----------------------------------------------------------------------------
+
+#include <iostream>
+#include <random>
+#include <print>
+#include <algorithm>
+#include "save.h"
+
+//qsort : generic function (많은 자료형 사용 가능)
+
+std::default_random_engine dre;
+std::uniform_int_distribution uid{ 1,99'9999 };
+
+int count{0};
+
+int main()
+{
+	const int NUM{ 200};
+
+	int num[NUM];
+
+	for (int& number : num)
+	{
+		number = uid(dre);
+	}
+	//qsort로 정렬
+	int compFunc(const void*a, const void* b);
+	std::qsort(num, NUM, sizeof(int),compFunc);
+
+	for (int num : num)
+	{
+		std::print("{:8d}", num);
+	}
+	std::print("\n");
+	std::cout << "호출 횟수 : " << count << '\n';
+	save("15.cpp", "FileOutput\\2023_10_04 CPP 15output", std::ios::app, true);
+}
+
+int compFunc(const void* a, const void* b)
+{
+	++count;
+	std::cout << "비교 - " << *(int*)a << "-" << *(int*)b << std::endl;
+	return *(int*)b - *(int*)a;
+}
+
+
+=============================================
+ Upload Time : 10/04/23 Wednesday 16:33:17
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 10월 4일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (5주 2일)
+// 
+// 10월 9일(6주 1일) - 동영상 강의
+// 10월 25일 (8주 2일) - 중간시험
+//-----------------------------------------------------------------------------
+// 내용
+// change 함수
+//-----------------------------------------------------------------------------
+// 과제 - 정렬 (Sort)
+//-----------------------------------------------------------------------------
+
+#include <iostream>
+#include <random>
+#include <print>
+#include <algorithm>
+#include "save.h"
+
+//qsort : generic function (많은 자료형 사용 가능)
+
+int main()
+{
+	char *p = const_cast<char*>("the quick brown fox jumps over the lazy dog.");
+	std::cout << "p" << '\n';
+	save("15.cpp", "FileOutput\\2023_10_04 CPP 15output", std::ios::app, true);
+}
+
+
+=============================================
+ Upload Time : 10/04/23 Wednesday 16:35:32
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 10월 4일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (5주 2일)
+// 
+// 10월 9일(6주 1일) - 동영상 강의
+// 10월 25일 (8주 2일) - 중간시험
+//-----------------------------------------------------------------------------
+// 내용
+// change 함수
+//-----------------------------------------------------------------------------
+// 과제 - 정렬 (Sort)
+//-----------------------------------------------------------------------------
+
+#include <iostream>
+#include <random>
+#include <print>
+#include <algorithm>
+#include "save.h"
+
+//qsort : generic function (많은 자료형 사용 가능)
+
+int main()
+{
+	char p[] = "the quick brown fox jumps over the lazy dog.";
+	std::cout << p << '\n';
+
+	int comp(const void* p, const void* q);
+	std::qsort(p, strlen(p), sizeof(char), comp);
+	std::cout << p << std::endl;
+	save("15.cpp", "FileOutput\\2023_10_04 CPP 15output", std::ios::app, true);
+}
+
+int comp(const void* p, const void* q)
+{
+	return *(int*)p - *(int*)q;
+}
+
+
+=============================================
+ Upload Time : 10/04/23 Wednesday 16:37:31
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 10월 4일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (5주 2일)
+// 
+// 10월 9일(6주 1일) - 동영상 강의
+// 10월 25일 (8주 2일) - 중간시험
+//-----------------------------------------------------------------------------
+// 내용
+// change 함수
+//-----------------------------------------------------------------------------
+// 과제 - 정렬 (Sort)
+//-----------------------------------------------------------------------------
+
+#include <iostream>
+#include <random>
+#include <print>
+#include <algorithm>
+#include "save.h"
+
+//qsort : generic function (많은 자료형 사용 가능)
+
+int main()
+{
+	char p[] = "the quick brown fox jumps over the lazy dog";
+	std::cout << p << '\n';
+
+	int comp(const void* p, const void* q);
+	std::qsort(p, strlen(p), sizeof(char), comp);
+	std::cout << p << std::endl;
+	save("15.cpp", "FileOutput\\2023_10_04 CPP 15output", std::ios::app, true);
+}
+
+int comp(const void* p, const void* q)
+{
+	return *(char*)p- *(char*)q;
+}
+
+
+=============================================
+ Upload Time : 10/04/23 Wednesday 16:59:13
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 10월 4일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (5주 2일)
+// 
+// 10월 9일(6주 1일) - 동영상 강의
+// 10월 25일 (8주 2일) - 중간시험
+//-----------------------------------------------------------------------------
+// 내용
+// change 함수
+//-----------------------------------------------------------------------------
+// 과제 - 정렬 (Sort)
+//-----------------------------------------------------------------------------
+
+#include <iostream>
+#include <random>
+#include <print>
+#include <algorithm>
+#include "save.h"
+
+//qsort : generic function (많은 자료형 사용 가능)
+//정렬 방법이 자유로움.
+
+int comp(const void* , const void* );
+
+int main() // function call operator
+{
+	char p[] = "the quick brown fox jumps over the lazy dog";
+	std::cout << p << '\n';
+
+	std::qsort(p, strlen(p), sizeof(char), [](const void* a, const void* b) {
+		return *(char*)a - *(char*)b;
+		});
+	std::cout << p << std::endl;
+	save("15.cpp", "FileOutput\\2023_10_04 CPP 15output", std::ios::app, true);
+}
+
+=============================================
+ Upload Time : 10/04/23 Wednesday 17:02:18
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 10월 4일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (5주 2일)
+// 
+// 10월 9일(6주 1일) - 동영상 강의
+// 10월 25일 (8주 2일) - 중간시험
+//-----------------------------------------------------------------------------
+// 내용
+// 정렬 (Sort) - C언어 라이브러리 함수 qsort
+//-----------------------------------------------------------------------------
+// 과제 - 이름없는 함수 람다(lambda)
+//-----------------------------------------------------------------------------
+
+#include <iostream>
+#include <random>
+#include <print>
+#include <algorithm>
+#include "save.h"
+
+//qsort : generic function (많은 자료형 사용 가능)
+//정렬 방법이 자유로움.
+
+int comp(const void* , const void* );
+
+int main() // function call operator
+{
+	[]() {
+		std::cout << "hey i am lambda";
+		};
+	save("15.cpp", "FileOutput\\2023_10_04 CPP 15output", std::ios::app, true);
+}
+
+=============================================
+ Upload Time : 10/04/23 Wednesday 17:03:29
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 10월 4일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (5주 2일)
+// 
+// 10월 9일(6주 1일) - 동영상 강의
+// 10월 25일 (8주 2일) - 중간시험
+//-----------------------------------------------------------------------------
+// 내용
+// 정렬 (Sort) - C언어 라이브러리 함수 qsort
+//-----------------------------------------------------------------------------
+// 과제 - 이름없는 함수 람다(lambda)
+//-----------------------------------------------------------------------------
+
+#include <iostream>
+#include <random>
+#include <print>
+#include <algorithm>
+#include "save.h"
+
+//qsort : generic function (많은 자료형 사용 가능)
+//정렬 방법이 자유로움.
+
+int comp(const void* , const void* );
+
+int main() // function call operator
+{
+	[]() {
+		std::cout << "hey i am lambda" << '\n';
+		}();
+	save("15.cpp", "FileOutput\\2023_10_04 CPP 15output", std::ios::app, true);
+}
