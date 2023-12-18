@@ -1,0 +1,166 @@
+
+
+=============================================
+ Upload Time : 11/20/23 Monday 18:47:19
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 11월 15일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (12주 1일)
+// 
+// 2023. 12. 11 월요일 (15주 1) - 한 학기 정리, 책소개 , 종강
+// 2023. 12. 13 수요일 (15주 2) - 기말 시험, 12월 18일 월요일 - 성적 게시
+// 
+//-----------------------------------------------------------------------------
+// 사용자 정의 자료형
+//-----------------------------------------------------------------------------
+// 과제 - 나만의 자료형을 많이 만들어 볼 것.
+//-----------------------------------------------------------------------------
+
+#include <iostream>
+#include <random>
+#include <fstream>
+#include "save.h"
+
+// Why OOP?
+// 1. information hiding (private member)
+// 2. Inheritance - code reuse
+// 3. Polymorphism - 다형성
+
+std::default_random_engine dre{};
+std::uniform_int_distribution uid{1,100};
+int g_idx{ 1 };
+class Dog {
+	std::string name;
+	int age;
+	
+public:
+	Dog() 
+		: name{ "댕댕-"+ std::to_string(g_idx) +"호"},
+		age{uid(dre)} {
+
+	}
+	friend std::ostream& operator<<(std::ostream& os, const Dog& dog) {
+		return os << "이름 : " << dog.name << ' ' << "나이 : " << dog.age;
+	}
+};
+
+int main(void)
+{
+	Dog dogs[20]; // 이름과 나이는 랜덤으로
+	for (const Dog& dog : dogs) {
+		std::cout << dog;
+	}
+	save("29.cpp", "FileOutput\\2023_11_20 CPP 29-output", std::ios::app, true);
+
+}
+
+
+=============================================
+ Upload Time : 11/20/23 Monday 18:47:49
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 11월 15일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (12주 1일)
+// 
+// 2023. 12. 11 월요일 (15주 1) - 한 학기 정리, 책소개 , 종강
+// 2023. 12. 13 수요일 (15주 2) - 기말 시험, 12월 18일 월요일 - 성적 게시
+// 
+//-----------------------------------------------------------------------------
+// 사용자 정의 자료형
+//-----------------------------------------------------------------------------
+// 과제 - 나만의 자료형을 많이 만들어 볼 것.
+//-----------------------------------------------------------------------------
+
+#include <iostream>
+#include <random>
+#include <fstream>
+#include "save.h"
+
+// Why OOP?
+// 1. information hiding (private member)
+// 2. Inheritance - code reuse
+// 3. Polymorphism - 다형성
+
+std::default_random_engine dre{};
+std::uniform_int_distribution uid{1,100};
+int g_idx{ 1 };
+class Dog {
+	std::string name;
+	int age;
+	
+public:
+	Dog() 
+		: name{ "댕댕-"+ std::to_string(g_idx++) +"호"},
+		age{uid(dre)} {
+
+	}
+	friend std::ostream& operator<<(std::ostream& os, const Dog& dog) {
+		return os << "이름 : " << dog.name << ' ' << "나이 : " << dog.age;
+	}
+};
+
+int main(void)
+{
+	Dog dogs[20]; // 이름과 나이는 랜덤으로
+	for (const Dog& dog : dogs) {
+		std::cout << dog << '\n';
+	}
+	save("29.cpp", "FileOutput\\2023_11_20 CPP 29-output", std::ios::app, true);
+
+}
+
+
+=============================================
+ Upload Time : 11/20/23 Monday 18:51:23
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 11월 15일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (12주 1일)
+// 
+// 2023. 12. 11 월요일 (15주 1) - 한 학기 정리, 책소개 , 종강
+// 2023. 12. 13 수요일 (15주 2) - 기말 시험, 12월 18일 월요일 - 성적 게시
+// 
+//-----------------------------------------------------------------------------
+// 사용자 정의 자료형
+//-----------------------------------------------------------------------------
+// 과제 - 나만의 자료형을 많이 만들어 볼 것.
+//-----------------------------------------------------------------------------
+
+#include <iostream>
+#include <random>
+#include <fstream>
+#include "save.h"
+
+// Why OOP?
+// 1. information hiding (private member)
+// 2. Inheritance - code reuse
+// 3. Polymorphism - 다형성
+
+std::default_random_engine dre{};
+std::uniform_int_distribution uid{1,100};
+int g_idx{ 1 };
+class Dog {
+	std::string name;
+	int age;
+	
+public:
+	Dog() 
+		: name{ "댕댕-"+ std::to_string(g_idx++) +"호"},
+		age{uid(dre)} {
+
+	}
+	friend std::ostream& operator<<(std::ostream& os, const Dog& dog) {
+		return os << "이름 : " << dog.name << ' ' << "나이 : " << dog.age;
+	}
+};
+
+int main(void)
+{
+	Dog dogs[20]; // 이름과 나이는 랜덤으로
+	std::ofstream out{ "Jail.dogz" };
+	for (const Dog& dog : dogs) {
+		out << dog << '\n';
+	}
+	save("29.cpp", "FileOutput\\2023_11_20 CPP 29-output", std::ios::app, true);
+
+}

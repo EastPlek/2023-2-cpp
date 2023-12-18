@@ -1,0 +1,85 @@
+
+
+=============================================
+ Upload Time : 11/27/23 Monday 17:41:57
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 11월 15일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (12주 1일)
+// 
+// 2023. 12. 11 월요일 (15주 1) - 한 학기 정리, 책소개 , 종강
+// 2023. 12. 13 수요일 (15주 2) - 기말 시험, 12월 18일 월요일 - 성적 게시
+// 
+//-----------------------------------------------------------------------------
+// 사용자 정의 자료형
+//-----------------------------------------------------------------------------
+// 과제 - 나만의 자료형을 많이 만들어 볼 것.
+//-----------------------------------------------------------------------------
+
+// Animal (generalization)
+//   ^
+//   | is-a
+//  Dog
+//   ^ 
+//   |
+//  Sheperd (specialization)
+
+//Animal a;
+//Dog d;
+// a = d; ok!
+// d = a; X!
+
+// smart pointer로
+
+#include <iostream>
+
+#include "save.h"
+
+// 상속 연습 | 동물 개 새를 상속계층 (hierarchy)로 만들어본다.
+
+class Animal {
+
+int age{};
+
+public:
+	Animal() {
+		std::cout << "[속보] Animal, 태어나다" << '\n';
+	}
+	Animal(int num) : age{ num } {
+	}
+	~Animal() {
+		std::cout << "[긴급속보] Animal, 죽다" << '\n';
+	}
+	void move() const {
+		std::cout << "동물 움직인다 " << age << '\n';
+	}
+
+};
+
+class Dog : public Animal {
+	bool bite{ false };
+public: 
+	Dog() {
+		std::cout << "[속보] Dog, 태어나다 " << '\n';
+	}
+	Dog(int num) : Animal(num) {
+	}
+	~Dog() {
+		std::cout << "[긴급속보] Dog, 죽다" << '\n';
+	}
+};
+
+class Bird : public Animal {
+
+};
+
+int main(void)
+{
+	Animal a;
+	Dog d; 
+	a = d;
+	//d = a;
+
+	save("30.cpp", "FileOutput\\2023_11_27 CPP 30-output", std::ios::app, true);
+
+}

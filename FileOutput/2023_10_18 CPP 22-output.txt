@@ -1,0 +1,131 @@
+
+
+=============================================
+ Upload Time : 10/18/23 Wednesday 16:10:50
+=============================================
+
+#include <iostream>
+#include <random>
+#include <math.h>
+#include "save.h"
+
+
+std::default_random_engine dre;
+std::uniform_int_distribution uid{-100,100};
+
+class Point2D{
+public:
+	Point2D() {
+		x = uid(dre);
+		y = uid(dre);
+	}
+	void print() { std::cout << "(" << x << ", " << y << ")" << '\n'; }
+	double getDist() { return std::sqrt(x * x + y * y); }
+private:
+	int x;
+	int y;
+};
+int main(void)
+{
+	Point2D p2d[100];
+
+	for (auto point : p2d)
+	{
+		if (point.getDist() <= 10)
+		{
+			point.print();
+		}
+	}
+	save("22.cpp", "FileOutput\\2023_10_18 CPP 22-output", std::ios::app, true);
+}
+
+=============================================
+ Upload Time : 10/18/23 Wednesday 16:35:44
+=============================================
+
+#include <iostream>
+#include <random>
+#include <math.h>
+#include "save.h"
+
+
+std::default_random_engine dre;
+std::uniform_int_distribution<int> uid{-100,100};
+
+class Point2D{
+public:
+	Point2D() {
+		x = uid(dre);
+		y = uid(dre);
+	}
+	void print() { std::cout << "(" << x << ", " << y << ")" << '\n'; }
+	double getDist() { return std::sqrt((x * x) + (y * y)); }
+private:
+	int x;
+	int y;
+};
+int main(void)
+{
+	Point2D p2d[100];
+	for (Point2D point : p2d)
+	{
+		if (point.getDist() < static_cast<double>(10))
+		{
+			point.print();
+		}
+	}
+	save("22.cpp", "FileOutput\\2023_10_18 CPP 22-output", std::ios::app, true);
+}
+
+=============================================
+ Upload Time : 10/18/23 Wednesday 16:54:16
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 10월 16일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (7주 2일)
+// 
+// 10월 25일 (8주 2일) - 중간시험
+//-----------------------------------------------------------------------------
+// 사용자 정의 자료형
+//-----------------------------------------------------------------------------
+// 과제 - 나만의 자료형을 많이 만들어 볼 것.
+//-----------------------------------------------------------------------------
+
+#include <iostream>
+#include <random>
+#include <math.h>
+#include "save.h"
+
+
+std::default_random_engine dre;
+std::uniform_int_distribution<int> uid{-100,100};
+
+
+class Point2D{	
+	//struct를 쓸 때 : public access가 더 간편하고 악영향이 없을 때
+	// this 포인터 : 자기 자신을 가리키는 포인터
+public:
+	Point2D() {
+		x = uid(dre);
+		y = uid(dre);
+	}
+	Point2D(int _x, int _y)
+	{
+		x = _x;
+		y = _y;
+	}
+	void print() { std::cout << "(" << x << ", " << y << ")" << '\n'; }
+	double getDist() { return std::sqrt((x * x) + (y * y)); }
+private:
+	int x;
+	int y;
+};
+int main(void)
+{
+	Point2D a{ 3,4 };
+	Point2D b{ -10,10 };
+
+	a.print();
+	b.print();
+	save("22.cpp", "FileOutput\\2023_10_18 CPP 22-output", std::ios::app, true);
+}

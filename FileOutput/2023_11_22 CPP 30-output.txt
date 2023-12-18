@@ -1,0 +1,129 @@
+
+
+=============================================
+ Upload Time : 11/22/23 Wednesday 17:19:06
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 11월 15일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (12주 1일)
+// 
+// 2023. 12. 11 월요일 (15주 1) - 한 학기 정리, 책소개 , 종강
+// 2023. 12. 13 수요일 (15주 2) - 기말 시험, 12월 18일 월요일 - 성적 게시
+// 
+//-----------------------------------------------------------------------------
+// 사용자 정의 자료형
+//-----------------------------------------------------------------------------
+// 과제 - 나만의 자료형을 많이 만들어 볼 것.
+//-----------------------------------------------------------------------------
+
+// OOP
+// 1. Encapsulation
+// 2. Inheritance
+// 3. Polymorphism * - static
+//                 |___dynamic  binding
+
+// ========================================================================
+// class X{
+// private:
+//	싱글톤 쓰지마라
+//	date member;
+// public:
+//	function member;
+//	1. special member;
+//  2. operator overloading;
+//  3. getter / setter interface;
+//  4. friend(>>, <<); 
+// C++ Core Programming Guide
+// };
+// X a; -> 객체 a를 instancing 1. X a; - Data 2. {X a;} - Stack 3. X* = new X; - Freestore
+// 
+// ========================================================================
+// class X {
+// 바깥세상과 연결 ? -> 자원을 관리 (RAII)
+//  smart_pointer를 사용해야만 한다.
+//  6개의 special function을 반드시 코딩 
+// 
+// SPECIAL FUNCTIONS
+// 
+// 1,2. default constructor, default destructor
+// 3,4. copy constructor, copy operator=
+// 5,6. move constuctor, move operator=
+// 
+// memory leak을 억제하려면 smart_ptr
+// ========================================================================
+// 다른 객체의 관계
+// class X{
+//	Y y;     =\
+//	Y z[4];   ||____ => 용어       UML (Unifed Modeling Language)
+// `Y* py;    ||
+//	f (Y);   =/
+// }
+// ========================================================================
+// 상속
+// Y의 공통된 특성을 X가 가짐 (이렇게 되면 X의 메모리는 Y보다 크거나 같게 된다.)
+// class X : public Y {
+// 
+// 
+// }
+// 
+// Inheritance의 장점 
+// 1. 코드 재사용
+// 2. 다형성 구현 -> Game
+// one interface multiple method (behaviour)
+// hierarchy (계층)
+// ========================================================================
+
+// smart pointer로
+
+#include <iostream>
+
+#include "save.h"
+
+// 상속 연습 | 동물 개 새를 상속계층 (hierarchy)로 만들어본다.
+
+class Animal {
+
+int age{};
+
+public:
+	Animal() {
+		std::cout << "[속보] Animal, 태어나다" << '\n';
+	}
+	Animal(int num) : age{ num } {
+	}
+	~Animal() {
+		std::cout << "[긴급속보] Animal, 죽다" << '\n';
+	}
+	void move() const {
+		std::cout << "동물 움직인다 " << age << '\n';
+	}
+
+};
+
+class Dog : public Animal {
+	bool bite{ false };
+public: 
+	Dog() {
+		std::cout << "[속보] Dog, 태어나다 " << '\n';
+	}
+	Dog(int num) : Animal(num) {
+	}
+	~Dog() {
+		std::cout << "[긴급속보] Dog, 죽다" << '\n';
+	}
+};
+
+class Bird : public Animal {
+
+};
+
+int main(void)
+{
+	Dog dog{ 10 };
+	// 상속받은 메모리는 부모의 내용부터 채우고 자식의 내용부터 제거한다.
+	std::cout << sizeof(dog) << '\n';
+	dog.move();
+
+	save("30.cpp", "FileOutput\\2023_11_22 CPP 30-output", std::ios::app, true);
+
+}

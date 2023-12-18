@@ -1,0 +1,666 @@
+
+
+=============================================
+ Upload Time : 11/06/23 Monday 17:57:27
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 11월 6일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (10주 1일)
+// 
+//-----------------------------------------------------------------------------
+// 사용자 정의 자료형
+//-----------------------------------------------------------------------------
+// 과제 - 나만의 자료형을 많이 만들어 볼 것.
+//-----------------------------------------------------------------------------
+
+
+//	class ? { => Object Instancing
+//		6 special <- 자원 관리(RAII)
+//	};
+#include <iostream>
+#include <string>
+#include "save.h"
+
+int main(void)
+{
+	std::string s{"Greetings. I'm string, perfect object which can replace char* in C."};
+
+	std::cout << s << '\n';
+	save("26.cpp", "FileOutput\\2023_11_06 CPP 26-output", std::ios::app, true);
+}
+
+=============================================
+ Upload Time : 11/06/23 Monday 19:03:38
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 11월 6일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (10주 1일)
+// 
+//-----------------------------------------------------------------------------
+// 사용자 정의 자료형
+//-----------------------------------------------------------------------------
+// 과제 - 나만의 자료형을 많이 만들어 볼 것.
+//-----------------------------------------------------------------------------
+
+
+//	class ? { => Object Instancing
+//		6 special <- 자원 관리(RAII)
+//	};
+#include <iostream>
+#include <string>
+#include "save.h"
+
+class STRING {
+	size_t size{};
+	char* p{nullptr};
+public:
+	STRING(const char* s) : size{ strlen(s) }{
+		p = new char[size ];
+		memcpy(p, s, size);
+		std::cout << "STRING(const char*) - " << size << ", 번지 : " << (void*)p << '\n';
+	}
+	~STRING(){
+		std::cout << "~STRING() - " << size << ", 번지 : " << (void*)p << '\n';
+		delete[] p;
+	}
+
+	STRING(const STRING& other) {
+		if (other.size > size) {
+			delete[] p;
+			p = new char[size]; // deep-copy
+		}
+		size =  other.size ;
+		memcpy(p, other.p, size);
+		std::cout << "STRING 복사 생성 - " << size << ", 번지 : " << (void*)p << '\n';
+	}
+	STRING& operator= (const STRING& other) {
+		//나를 나로 할당하는 짓을 하지 말자.
+		if (this == &other) {
+			return *this;
+		}
+		if (other.size > size) {
+			delete[] p;
+			p = new char[size];
+		}
+		size = other.size;
+		memcpy(p, other.p, size);
+
+		std::cout << "STRING 복사 할당 - " << size << ", 번지 : " << (void*)p << '\n';
+		return *this;
+	}
+
+	//C++ 11에서 도입한 이동 생성과 이동할당을 코딩
+	// && - r-value reference (이동문법 지원, 완벽 전달 [perfect forwading] )
+	STRING(STRING&& other) : size{other.size } {
+		p = other.p;
+
+		// 만료될(expired) 객체 other를 초기화
+		other.size = 0;
+		other.p = nullptr; 
+
+		std::cout << "STRING 이동 생성 - " << size << ", 번지 : " << (void*)p << '\n';
+	}
+
+	STRING& operator=(const STRING&& other) {
+
+	}
+
+	void show() {
+		for (int i = 0; i < size; ++i) {
+			std::cout << p[i];
+		}
+		std::cout << '\n';
+	}
+};
+
+int main(void)
+{
+	STRING s{ "글자를 메모리에 저장하고 관리한다" };
+	STRING t = std::move(s); // move sementic 이동생성자를 코딩한다면 이동이 가능,
+							 // 
+
+	std::cout << "s-";  s.show();
+	std::cout << "t-"; t.show();
+
+
+	save("26.cpp", "FileOutput\\2023_11_06 CPP 26-output", std::ios::app, true);
+}
+
+=============================================
+ Upload Time : 11/08/23 Wednesday 15:42:01
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 11월 6일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (10주 1일)
+// 
+//-----------------------------------------------------------------------------
+// 사용자 정의 자료형
+//-----------------------------------------------------------------------------
+// 과제 - 나만의 자료형을 많이 만들어 볼 것.
+//-----------------------------------------------------------------------------
+
+
+//	class ? { => Object Instancing
+//		6 special <- 자원 관리(RAII)
+//	};
+#include <iostream>
+#include <string>
+#include "save.h"
+
+class STRING {
+	size_t size{};
+	char* p{nullptr};
+public:
+	STRING(const char* s) : size{ strlen(s) }{
+		p = new char[size ];
+		memcpy(p, s, size);
+		std::cout << "STRING(const char*) - " << size << ", 번지 : " << (void*)p << '\n';
+	}
+	~STRING(){
+		std::cout << "~STRING() - " << size << ", 번지 : " << (void*)p << '\n';
+		delete[] p;
+	}
+
+	STRING(const STRING& other) {
+		if (other.size > size) {
+			delete[] p;
+			p = new char[size]; // deep-copy
+		}
+		size =  other.size ;
+		memcpy(p, other.p, size);
+		std::cout << "STRING 복사 생성 - " << size << ", 번지 : " << (void*)p << '\n';
+	}
+	STRING& operator= (const STRING& other) {
+		//나를 나로 할당하는 짓을 하지 말자.
+		if (this == &other) {
+			return *this;
+		}
+		if (other.size > size) {
+			delete[] p;
+			p = new char[size];
+		}
+		size = other.size;
+		memcpy(p, other.p, size);
+
+		std::cout << "STRING 복사 할당 - " << size << ", 번지 : " << (void*)p << '\n';
+		return *this;
+	}
+
+	//C++ 11에서 도입한 이동 생성과 이동할당을 코딩
+	// && - r-value reference (이동문법 지원, 완벽 전달 [perfect forwading] )
+	STRING(STRING&& other) : size{other.size } {
+		p = other.p;
+
+		// 만료될(expired) 객체 other를 초기화
+		other.size = 0;
+		other.p = nullptr; 
+
+		std::cout << "STRING 이동 생성 - " << size << ", 번지 : " << (void*)p << '\n';
+	}
+
+	void show() {
+		for (int i = 0; i < size; ++i) {
+			std::cout << p[i];
+		}
+		std::cout << '\n';
+	}
+};
+
+int main(void)
+{
+	STRING s{ "글자를 메모리에 저장하고 관리한다" };
+	STRING t{ "나도 문자열을 관리하는 중" };
+
+
+	std::cout << "s-";  s.show();
+	std::cout << "t-"; t.show();
+
+	t = std::move(s);
+
+	std::cout << "이미 만들어진 객체 t가 s의 자원을 이동하여 가져온다." << '\n';
+
+	std::cout << "s-";  s.show();
+	std::cout << "t-"; t.show();
+
+	save("26.cpp", "FileOutput\\2023_11_06 CPP 26-output", std::ios::app, true);
+}
+
+=============================================
+ Upload Time : 11/08/23 Wednesday 15:51:38
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 11월 6일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (10주 1일)
+// 
+//-----------------------------------------------------------------------------
+// 사용자 정의 자료형
+//-----------------------------------------------------------------------------
+// 과제 - 나만의 자료형을 많이 만들어 볼 것.
+//-----------------------------------------------------------------------------
+
+
+//	class ? { => Object Instancing
+//		6 special <- 자원 관리(RAII)
+//	};
+#include <iostream>
+#include <string>
+#include "save.h"
+
+class STRING {
+	size_t size{};
+	char* p{nullptr};
+public:
+	STRING(const char* s) : size{ strlen(s) }{
+		p = new char[size ];
+		memcpy(p, s, size);
+		std::cout << "STRING(const char*) - " << size << ", 번지 : " << (void*)p << '\n';
+	}
+	~STRING(){
+		std::cout << "~STRING() - " << size << ", 번지 : " << (void*)p << '\n';
+		delete[] p;
+	}
+
+	STRING(const STRING& other) {
+		if (other.size > size) {
+			delete[] p;
+			p = new char[size]; // deep-copy
+		}
+		size =  other.size ;
+		memcpy(p, other.p, size);
+		std::cout << "STRING 복사 생성 - " << size << ", 번지 : " << (void*)p << '\n';
+	}
+	STRING& operator= (const STRING& other) {
+		//나를 나로 할당하는 짓을 하지 말자.
+		if (this == &other) {
+			return *this;
+		}
+		if (other.size > size) {
+			delete[] p;
+			p = new char[size];
+		}
+		size = other.size;
+		memcpy(p, other.p, size);
+
+		std::cout << "STRING 복사 할당 - " << size << ", 번지 : " << (void*)p << '\n';
+		return *this;
+	}
+
+	//C++ 11에서 도입한 이동 생성과 이동할당을 코딩
+	// && - r-value reference (이동문법 지원, 완벽 전달 [perfect forwading] )
+	STRING(STRING&& other) : size{other.size } {
+		p = other.p;
+
+		// 만료될(expired) 객체 other를 초기화
+		other.size = 0;
+		other.p = nullptr; 
+
+		std::cout << "STRING 이동 생성 - " << size << ", 번지 : " << (void*)p << '\n';
+	}
+
+
+	// 2023. 11.8 move assignment operator
+	STRING& operator= (STRING&& other) { // STRING&& - rvalue reference
+		if (this == &other)
+			return *this;
+		delete[] p;
+		p = other.p; // 이동;
+
+		other.size = 0;
+		other.p = nullptr;
+
+		std::cout << "STRING 이동 할당 - " << size << ", 번지 : " << (void*)p << '\n';
+		return *this;
+	}
+
+	void show() {
+		for (int i = 0; i < size; ++i) {
+			std::cout << p[i];
+		}
+		std::cout << '\n';
+	}
+};
+
+int main(void)
+{
+	STRING s{ "글자를 메모리에 저장하고 관리한다" };
+	STRING t{ "나도 문자열을 관리하는 중" };
+
+
+	std::cout << "s-";  s.show();
+	std::cout << "t-"; t.show();
+
+	t = std::move(s); // move assignment가 호출되는 상황
+					  // move semantic에 따라 함수가 있으면 그 함수를 호출하고
+					  // 함수가 없다면 복사할당연산자를 대신 호출한다.
+
+	std::cout << "이미 만들어진 객체 t가 s의 자원을 이동하여 가져온다." << '\n';
+
+	std::cout << "s-";  s.show();
+	std::cout << "t-"; t.show();
+
+	save("26.cpp", "FileOutput\\2023_11_06 CPP 26-output", std::ios::app, true);
+}
+
+=============================================
+ Upload Time : 11/08/23 Wednesday 16:36:14
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 11월 6일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (10주 1일)
+// 
+//-----------------------------------------------------------------------------
+// 사용자 정의 자료형
+//-----------------------------------------------------------------------------
+// 과제 - 나만의 자료형을 많이 만들어 볼 것.
+//-----------------------------------------------------------------------------
+
+
+//	class ? { => Object Instancing
+//		6 special <- 자원 관리(RAII)
+//	};
+
+#include <Iostream>
+#include <string>
+#include "STRING.h"
+#include "save.h"
+
+int main(void)
+{
+	STRING s{ "글자를 메모리에 저장하고 관리한다" };
+	STRING t{ "나도 문자열을 관리하는 중" };
+
+
+	std::cout << "s-";  s.show();
+	std::cout << "t-"; t.show();
+
+	t = std::move(s); // move assignment가 호출되는 상황
+					  // move semantic에 따라 함수가 있으면 그 함수를 호출하고
+					  // 함수가 없다면 복사할당연산자를 대신 호출한다.
+
+	std::cout << "이미 만들어진 객체 t가 s의 자원을 이동하여 가져온다." << '\n';
+
+	std::cout << "s-";  s.show();
+	std::cout << "t-"; t.show();
+
+	save("26.cpp", "FileOutput\\2023_11_06 CPP 26-output", std::ios::app, true);
+}
+
+=============================================
+ Upload Time : 11/13/23 Monday 18:10:17
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 11월 6일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (11주 1일)
+// 
+//-----------------------------------------------------------------------------
+// 사용자 정의 자료형
+//-----------------------------------------------------------------------------
+// 과제 - 나만의 자료형을 많이 만들어 볼 것.
+//-----------------------------------------------------------------------------
+
+
+//	class ? { => Object Instancing
+//		6 special <- 자원 관리(RAII)
+//	};
+
+#include <iostream>
+#include <string>
+#include <print>
+#include "STRING.h"
+#include "save.h"
+
+
+int main(void)
+{
+	STRING::observe = true;
+	STRING s{ "1234567890" };
+	
+	//s = s + " - 1234567890";
+	// s = s.operator+(" - 1234567890");'
+
+	std::cout << s << '\n';
+
+	save("26.cpp", "FileOutput\\2023_11_06 CPP 26-output", std::ios::app, true);
+}
+
+=============================================
+ Upload Time : 11/13/23 Monday 18:15:23
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 11월 6일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (11주 1일)
+// 
+//-----------------------------------------------------------------------------
+// 사용자 정의 자료형
+//-----------------------------------------------------------------------------
+// 과제 - 나만의 자료형을 많이 만들어 볼 것.
+//-----------------------------------------------------------------------------
+
+
+//	class ? { => Object Instancing
+//		6 special <- 자원 관리(RAII)
+//	};
+
+#include <iostream>
+#include <string>
+#include <print>
+#include "STRING.h"
+#include "save.h"
+
+
+int main(void)
+{
+	// std::cout << 1 << 2 << 3; //<< extractor
+
+	std::cout.operator<<(1).operator<<(2).operator<<(3).operator<<('\n');
+
+	save("26.cpp", "FileOutput\\2023_11_06 CPP 26-output", std::ios::app, true);
+}
+
+=============================================
+ Upload Time : 11/13/23 Monday 18:33:26
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 11월 6일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (11주 1일)
+// 
+//-----------------------------------------------------------------------------
+// 사용자 정의 자료형
+//-----------------------------------------------------------------------------
+// 과제 - 나만의 자료형을 많이 만들어 볼 것.
+//-----------------------------------------------------------------------------
+
+
+//	class ? { => Object Instancing
+//		6 special <- 자원 관리(RAII)
+//	};
+
+#include <iostream>
+#include <string>
+#include <print>
+#include "STRING.h"
+#include "save.h"
+
+
+int main(void)
+{
+	STRING s{ "6789" };
+
+	std::cout << s << '\n'; // std::cout.operator(STRING) 이런 함수를 코딩하면 끝?
+						    // 이렇게 코딩하면 표준을 변경할 수 밖에 없다
+	// 컴파일러는 연산자 오버로딩을 해결하기 위해
+	// left-hand-side operator기호 right-hand-side
+	// 1.lhs의 멤버함수로 operator기호(rhs) 함수가 있는지 찾는다.
+	// 2. 함수의 이름이 operator기호(lhs,rhs)인 전역함수가 있는지 찾는다.
+
+	STRING t = "012345" + s;
+
+	std::cout << t << '\n';
+
+	save("26.cpp", "FileOutput\\2023_11_06 CPP 26-output", std::ios::app, true);
+}
+
+=============================================
+ Upload Time : 11/13/23 Monday 18:42:43
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 11월 6일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (11주 1일)
+// 
+//-----------------------------------------------------------------------------
+// 사용자 정의 자료형
+//-----------------------------------------------------------------------------
+// 과제 - 나만의 자료형을 많이 만들어 볼 것.
+//-----------------------------------------------------------------------------
+
+
+//	class ? { => Object Instancing
+//		6 special <- 자원 관리(RAII)
+//	};
+
+#include <iostream>
+#include <string>
+#include <print>
+#include "STRING.h"
+#include "save.h"
+
+
+int main(void)
+{
+	STRING s[5]{"ssk","tt","v","maxi","faults"};
+
+	//[문제] s를 길이 오름차순으로 정렬하시오.
+
+	std::qsort(s, 5, sizeof(STRING), [](const void* a, const void* b) {
+		return static_cast<int>(((STRING*)a)->length() - ((STRING*)b)->length());
+		});
+	for (STRING s : s)
+		std::cout << s <<'\n';
+
+	save("26.cpp", "FileOutput\\2023_11_06 CPP 26-output", std::ios::app, true);
+}
+
+=============================================
+ Upload Time : 11/13/23 Monday 18:55:34
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 11월 6일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (11주 1일)
+// 
+//-----------------------------------------------------------------------------
+// 사용자 정의 자료형
+//-----------------------------------------------------------------------------
+// 과제 - 나만의 자료형을 많이 만들어 볼 것.
+//-----------------------------------------------------------------------------
+
+
+//	class ? { => Object Instancing
+//		6 special <- 자원 관리(RAII)
+//	};
+
+#include <iostream>
+#include <string>
+#include <print>
+#include "STRING.h"
+#include "save.h"
+
+
+int main(void)
+{
+	STRING s{ "12345" }; //string은 C언어에서 문자열을 관리하던 모든 것을 대체한다.
+
+	STRING t = "0" + s;
+
+	for (int i = 0; i < s.length(); ++i) {
+		std::cout << s[i] << '\n'; // std::cout << s.operator[](i) << '\n';
+	}
+
+	save("26.cpp", "FileOutput\\2023_11_06 CPP 26-output", std::ios::app, true);
+}
+
+=============================================
+ Upload Time : 11/13/23 Monday 19:05:35
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 11월 6일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (11주 1일)
+// 
+//-----------------------------------------------------------------------------
+// 사용자 정의 자료형
+//-----------------------------------------------------------------------------
+// 과제 - 나만의 자료형을 많이 만들어 볼 것.
+//-----------------------------------------------------------------------------
+
+
+//	class ? { => Object Instancing
+//		6 special <- 자원 관리(RAII)
+//	};
+
+#include <iostream>
+#include <string>
+#include <print>
+#include "STRING.h"
+#include "save.h"
+
+
+int main(void)
+{
+	STRING s{ "C++ Programming Language"};
+
+	// [문제] s의 글자열을 오름차순으로 정렬하라 - robust
+
+	//lvalue - location value
+	std::qsort(&s[0], s.length(), sizeof(char), [](const void* a, const void* b) {
+		return *(char*)b - *(char*)a;
+		});
+	std::cout << s << '\n';
+
+	save("26.cpp", "FileOutput\\2023_11_06 CPP 26-output", std::ios::app, true);
+}
+
+=============================================
+ Upload Time : 11/15/23 Wednesday 16:22:18
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 11월 6일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (11주 1일)
+// 
+//-----------------------------------------------------------------------------
+// 사용자 정의 자료형
+//-----------------------------------------------------------------------------
+// 과제 - 나만의 자료형을 많이 만들어 볼 것.
+//-----------------------------------------------------------------------------
+
+
+//	class ? { => Object Instancing
+//		6 special <- 자원 관리(RAII)
+//	};
+
+#include <iostream>
+#include <string>
+#include <print>
+#include "STRING.h"
+#include "save.h"
+
+
+int main(void)
+{
+	STRING s[5]{ "333","1","55555","4444","22" };
+
+	std::qsort(s, 5, sizeof(STRING), [](const void* a, const void* b) {
+		return static_cast<int>(((STRING*)a)->length() - ((STRING*)b)->length());
+		});
+
+	//1 . 컴파일러는 왼쪽 피연산자의 멤버로 .operator(s)가 있나 찾는다.
+	//2. 전역함수를 찾는다. operator+(const char*,STRING)
+
+	STRING temp;
+	for (const STRING& s : s) {
+		temp = temp + s;
+	}
+
+
+	std::cout << temp << '\n';
+
+	save("26.cpp", "FileOutput\\2023_11_06 CPP 26-output", std::ios::app, true);
+}

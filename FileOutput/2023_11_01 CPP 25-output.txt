@@ -1,0 +1,399 @@
+
+
+=============================================
+ Upload Time : 11/01/23 Wednesday 16:02:04
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 11월 1일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (9주 2일)
+// 
+//-----------------------------------------------------------------------------
+// 사용자 정의 자료형
+//-----------------------------------------------------------------------------
+// 과제 - 나만의 자료형을 많이 만들어 볼 것.
+//-----------------------------------------------------------------------------
+
+// dangling pointer
+
+#include <iostream>
+#include "save.h"
+
+class MemoryMonster {
+	int* p, _num;
+public:
+	MemoryMonster(const int num) : _num{ num } {
+		p = new int[num];
+		for (int i = 0; i < num; i++) {
+			p[i] = num;
+		}
+	}
+	MemoryMonster(const MemoryMonster& other) : _num{ other._num } {// deep copy
+		p = new int[_num];
+		for (int i = 0; i < _num; i++) {
+			p[i] = _num;
+		}
+	}
+	~MemoryMonster() {
+		delete[] p;
+	}
+
+	void show() {
+		std::cout << "Monster-" << _num << std::endl;
+	}
+};
+
+int main(void)
+{
+	MemoryMonster a{ 999 };
+	MemoryMonster b{ a };
+	a.show();
+	b.show();
+	save("25.cpp", "FileOutput\\2023_11_01 CPP 25-output", std::ios::app, true);
+}
+
+=============================================
+ Upload Time : 11/01/23 Wednesday 16:07:24
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 11월 1일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (9주 2일)
+// 
+//-----------------------------------------------------------------------------
+// 사용자 정의 자료형
+//-----------------------------------------------------------------------------
+// 과제 - 나만의 자료형을 많이 만들어 볼 것.
+//-----------------------------------------------------------------------------
+
+// dangling pointer
+
+#include <iostream>
+#include "save.h"
+
+class MemoryMonster {
+	int* p, _num;
+public:
+	MemoryMonster(const int num) : _num{ num } {
+		p = new int[num];
+		for (int i = 0; i < num; i++) {
+			p[i] = num;
+		}
+	}
+	MemoryMonster(const MemoryMonster& other) : _num{ other._num } {// deep copy
+		p = new int[_num];
+		//고속 메모리 복사
+		memcpy(p, other.p, _num * sizeof(int)); // DMA
+	}
+	~MemoryMonster() {
+		delete[] p;
+	}
+
+	void show() {
+		std::cout << "Monster-" << _num << std::endl;
+	}
+};
+
+int main(void)
+{
+	MemoryMonster a{ 999 };
+	MemoryMonster b{ a };
+	a.show();
+	b.show();
+	save("25.cpp", "FileOutput\\2023_11_01 CPP 25-output", std::ios::app, true);
+}
+
+=============================================
+ Upload Time : 11/01/23 Wednesday 16:37:50
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 11월 1일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (9주 2일)
+// 
+//-----------------------------------------------------------------------------
+// 사용자 정의 자료형
+//-----------------------------------------------------------------------------
+// 과제 - 나만의 자료형을 많이 만들어 볼 것.
+//-----------------------------------------------------------------------------
+
+// dangling pointer
+
+#include <iostream>
+#include "save.h"
+
+class MemoryMonster {
+	int* p{ nullptr }, _num{};
+public:
+	MemoryMonster() {
+		std::cout << "메몬 디폴트 생성 "  << _num << std::endl;
+	}
+	MemoryMonster(const int num) : _num{ num } {
+		p = new int[num];
+		for (int i = 0; i < num; i++) {
+			p[i] = num;
+		}
+		std::cout << "메몬 등장 " << _num << '\n';
+	}
+	MemoryMonster(const MemoryMonster& other) : _num{ other._num } {// deep copy
+		p = new int[_num];
+		//고속 메모리 복사
+		memcpy(p, other.p, _num * sizeof(int)); // DMA
+		std::cout << "메몬 복사 생성함 " << _num << '\n';
+	}
+	~MemoryMonster() {
+		std::cout << "메몬 사망 " << _num << '\n';
+		delete[] p; // RAII
+	}
+
+	void show() const { // 클래스의 데이터를 저장하지 않을 것이라고 보장
+		std::cout << "Monster-" << _num << std::endl;
+	} 
+};
+
+int main(void)
+{
+
+	// cv - qualifer (한정사)
+	// const int n;  int const n; (둘 다 가능)
+	// class 안이 비어있을 경우 컴파일러에서 디폴트 생성자를 만들어준다.
+	// MemoryMonster a; 디폴트 생성자
+	MemoryMonster mons[]{ 1,3,5 };
+
+	std::cout << "레퍼런스의 의미" << '\n';
+
+	for (const MemoryMonster& mon : mons) {
+		mon.show();
+	}
+
+	save("25.cpp", "FileOutput\\2023_11_01 CPP 25-output", std::ios::app, true);
+}
+
+=============================================
+ Upload Time : 11/06/23 Monday 17:31:05
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 11월 1일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (9주 2일)
+// 
+//-----------------------------------------------------------------------------
+// 사용자 정의 자료형
+//-----------------------------------------------------------------------------
+// 과제 - 나만의 자료형을 많이 만들어 볼 것.
+//-----------------------------------------------------------------------------
+
+// dangling pointer
+
+#include <iostream>
+#include <algorithm>
+#include "save.h"
+
+class MemoryMonster {
+	int* p{ nullptr }; 
+	int _num{};
+public:
+	MemoryMonster() {
+		std::cout << "메몬 디폴트 생성 "  << _num << std::endl;
+	}
+	MemoryMonster(const int num) : _num{ num } {
+		p = new int[num];
+		for (int i = 0; i < num; i++) {
+			p[i] = num;
+		}
+		std::cout << "메몬 등장 " << _num << '\n';
+	}
+	MemoryMonster(const MemoryMonster& other) : _num{ other._num } {// deep copy
+		p = new int[_num];
+		//고속 메모리 복사
+		memcpy(p, other.p, _num * sizeof(int)); // DMA
+		std::cout << "메몬 복사 생성함 " << _num << '\n';
+	}
+	~MemoryMonster() {
+		std::cout << "메몬 사망 " << _num << '\n';
+		delete[] p; // RAII
+	}
+
+	// 이 클래스가 바깥 세상과 소통하기 위한 멤버 함수 - interface 함수
+	//gettor와 settor를 필요한 경우 코딩한다.
+
+	void show() const { // 클래스의 데이터를 저장하지 않을 것이라고 보장
+		std::cout << "Monster-" << _num << std::endl;
+	} 
+	int getNum() const { return _num; }
+
+	void operator=(const MemoryMonster& other ) {
+		// TODO
+	}
+};
+
+int main(void)
+{
+
+	// cv - qualifer (한정사)
+	// const int n;  int const n; (둘 다 가능)
+	// class 안이 비어있을 경우 컴파일러에서 디폴트 생성자를 만들어준다.
+	// MemoryMonster a; 디폴트 생성자
+	MemoryMonster mons[]{ 1,3,5,7,9,2,4,6,8,10 };
+
+	std::cout << "레퍼런스의 의미" << '\n';
+
+	std::qsort(mons, 10, sizeof(MemoryMonster), [](const void* a, const void* b) {
+		return ((const MemoryMonster*)a)->getNum() - ((const MemoryMonster*)b)->getNum(); 
+		});
+	for (const MemoryMonster& mon : mons) {
+		mon.show();
+	}
+
+	save("25.cpp", "FileOutput\\2023_11_01 CPP 25-output", std::ios::app, true);
+}
+
+=============================================
+ Upload Time : 11/06/23 Monday 17:31:31
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 11월 1일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (9주 2일)
+// 
+//-----------------------------------------------------------------------------
+// 사용자 정의 자료형
+//-----------------------------------------------------------------------------
+// 과제 - 나만의 자료형을 많이 만들어 볼 것.
+//-----------------------------------------------------------------------------
+
+// dangling pointer
+
+#include <iostream>
+#include <algorithm>
+#include "save.h"
+
+class MemoryMonster {
+	int* p{ nullptr }; 
+	int _num{};
+public:
+	MemoryMonster() {
+		std::cout << "메몬 디폴트 생성 "  << _num << std::endl;
+	}
+	MemoryMonster(const int num) : _num{ num } {
+		p = new int[num];
+		for (int i = 0; i < num; i++) {
+			p[i] = num;
+		}
+		std::cout << "메몬 등장 " << _num << '\n';
+	}
+	MemoryMonster(const MemoryMonster& other) : _num{ other._num } {// deep copy
+		p = new int[_num];
+		//고속 메모리 복사
+		memcpy(p, other.p, _num * sizeof(int)); // DMA
+		std::cout << "메몬 복사 생성함 " << _num << '\n';
+	}
+	~MemoryMonster() {
+		std::cout << "메몬 사망 " << _num << '\n';
+		delete[] p; // RAII
+	}
+
+	// 이 클래스가 바깥 세상과 소통하기 위한 멤버 함수 - interface 함수
+	//gettor와 settor를 필요한 경우 코딩한다.
+
+	void show() const { // 클래스의 데이터를 저장하지 않을 것이라고 보장
+		std::cout << "Monster-" << _num << std::endl;
+	} 
+	int getNum() const { return _num; }
+
+	void operator=(const MemoryMonster& other ) {
+		// TODO
+	}
+};
+
+int main(void)
+{
+
+	// cv - qualifer (한정사)
+	// const int n;  int const n; (둘 다 가능)
+	// class 안이 비어있을 경우 컴파일러에서 디폴트 생성자를 만들어준다.
+	// MemoryMonster a; 디폴트 생성자
+	MemoryMonster a{ 100 };
+	MemoryMonster b{ 500 };
+	b = a;
+
+	save("25.cpp", "FileOutput\\2023_11_01 CPP 25-output", std::ios::app, true);
+}
+
+=============================================
+ Upload Time : 11/06/23 Monday 17:41:46
+=============================================
+
+//-----------------------------------------------------------------------------
+// 2023학년 2학기 c++ 11월 6일 | 월 | 9 ~ 10 수 |  7 ~ 8		      (10주 1일)
+// 
+//-----------------------------------------------------------------------------
+// 사용자 정의 자료형
+//-----------------------------------------------------------------------------
+// 과제 - 나만의 자료형을 많이 만들어 볼 것.
+//-----------------------------------------------------------------------------
+
+// dangling pointer
+
+#include <iostream>
+#include <algorithm>
+#include "save.h"
+
+class MemoryMonster {
+	int* p{ nullptr }; 
+	int _num{};
+public:
+	MemoryMonster() {
+		std::cout << "메몬 디폴트 생성 "  << _num << std::endl;
+	}
+	MemoryMonster(const int num) : _num{ num } {
+		p = new int[num];
+		for (int i = 0; i < num; i++) {
+			p[i] = num;
+		}
+		std::cout << "메몬 등장 " << _num << '\n';
+	}
+	MemoryMonster(const MemoryMonster& other) : _num{ other._num } {// deep copy
+		p = new int[_num];
+		//고속 메모리 복사
+		memcpy(p, other.p, _num * sizeof(int)); // DMA
+		std::cout << "메몬 복사 생성함 " << _num << '\n';
+	}
+	~MemoryMonster() {
+		std::cout << "메몬 사망 " << _num << '\n';
+		delete[] p; // RAII
+	}
+
+	//복사생성자를 코딩했다면 반드시 이와 짝이 되는 복사할당연산자 (copy assignment operator)를
+	// 코딩해야만 한다.
+	MemoryMonster& operator=(const MemoryMonster& other) {
+		// TODO
+		delete[] p; // 기존에 관리하고 있던 자원을 해제
+		_num = other._num; // _num을 얕은 복사
+		p = new int[_num]; // 새로운 크기의 p를 할당
+		memcpy(p, other.p, _num * sizeof(int)); // 고속 메모리 복사
+		std::cout << "메몬 복사 할당 " << _num << '\n';
+		return *this;
+	}
+
+	// 이 클래스가 바깥 세상과 소통하기 위한 멤버 함수 - interface 함수
+	//gettor와 settor를 필요한 경우 코딩한다.
+
+	void show() const { // 클래스의 데이터를 저장하지 않을 것이라고 보장
+		std::cout << "Monster-" << _num << std::endl;
+	} 
+	int getNum() const { return _num; }
+
+};
+
+int main(void)
+{
+
+	// cv - qualifer (한정사)
+	// const int n;  int const n; (둘 다 가능)
+	// class 안이 비어있을 경우 컴파일러에서 디폴트 생성자를 만들어준다.
+	// MemoryMonster a; 디폴트 생성자
+	MemoryMonster a{ 100 };
+	MemoryMonster b{ 500 };
+	b = a; // 오류 발생 (복사 할당 연산자로 코딩) {copy assignment} void operator= ();
+
+	a.show();
+	b.show();
+
+	save("25.cpp", "FileOutput\\2023_11_01 CPP 25-output", std::ios::app, true);
+}

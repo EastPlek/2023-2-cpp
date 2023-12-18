@@ -1,0 +1,23 @@
+
+
+=============================================
+ Upload Time : 10/18/23 Wednesday 16:56:26
+=============================================
+
+
+#include <iostream>
+#include <string>
+#include "save.h"
+
+class Dog {
+	std::string name;
+	int age;
+};
+
+int main(void)
+{
+	Dog dog;
+
+	std::cout << sizeof(dog) << '\n';
+	save("23.cpp", "FileOutput\\2023_10_18 CPP 23-output", std::ios::app, true);
+}
